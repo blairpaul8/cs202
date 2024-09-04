@@ -1,9 +1,6 @@
 #include "C4Board.h"
 #include <iostream>
 
-C4Board::C4Board() {
-}
-
 void C4Board::play() {
 	int turns = 0;
 	char player;
@@ -18,11 +15,13 @@ void C4Board::play() {
 		cout << player << "'s move: ";
 		cin >> playerMove;
 
+		//error checking players input
 		if (!(playerMove >= 0) || !(playerMove <= 6)) {
 			cout << "Invalid move input a number between 1 and 7." << endl;
 			continue;
 		}
 
+		//confirming the user isn't making a move in a column that is already full.
 		if (board[playerMove].getDisk(5) != ' ') {
 			cout <<  "That column is full. Choose a different coulmn." << endl;
 			continue;
@@ -30,7 +29,8 @@ void C4Board::play() {
 	
 		turns += 1;
 		addDisk(playerMove, player);
-
+		
+		//The following if statements call my check win functions and end the game if the return true.
 		if (checkColumn()) {
 			printBoard();
 			cout << player << " Wins" << endl;
@@ -52,7 +52,8 @@ void C4Board::play() {
 }
 
 
-void C4Board::printBoard() {	
+void C4Board::printBoard() {
+	//prints the numbers at the top of each column
 	for (int i = 0; i < 7; i++) {
 		cout << " " << i << " ";
 		if (i < 6) {
@@ -60,6 +61,7 @@ void C4Board::printBoard() {
 		}
 	}
 	cout << endl;
+	//prints the actual board with spaces and columns separated by |
 	for (int i = 5; i >= 0; i--) {
 		for (int j = 0; j < 7; j++) {
 			cout << ' ' << board[j].getDisk(i);
@@ -73,6 +75,7 @@ void C4Board::printBoard() {
 	
 }
 
+//adds the disks to the column selected by the user.
 void C4Board::addDisk(int column, char player) {
 	for (int i = 0; i < 6; i++) {
 		if (board[column].getDisk(i) == ' ') {
@@ -82,7 +85,9 @@ void C4Board::addDisk(int column, char player) {
 	}
 	
 }
-
+//Starts from the bottom left corner with a hard coded four cells in a row and
+//that is shifted up and over across the board to see if there are four 
+//in a row in the columns.
 bool C4Board::checkColumn() {
 	for (int i = 0; i < 7; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -100,6 +105,9 @@ bool C4Board::checkColumn() {
 	return false;
 }
 
+//Starts from the bottom left corner with a hard coded four cells in a row and
+//that is shifted up and over across the board to see if there are four 
+//in a row in the rows.
 bool C4Board::checkRow() {
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -117,6 +125,9 @@ bool C4Board::checkRow() {
 	return false;
 }
 
+//Starts from the bottom left corner with a hard coded four cells in a diagonal row and
+//that is shifted up and over across the board to see if there are four 
+//in a row in the diagonal cases.
 bool C4Board::checkDiagonal() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -146,4 +157,13 @@ bool C4Board::checkDiagonal() {
 	return false;
 }
 
+//checks to see if the column is full or not.
+bool C4Board::isFull(int playerMove) {
+	int maxDisks = board[0].getMaxDisks();
+	if (board[playerMove].getDisk(maxDisks - 1) != ' ') {
+		return true;
+	}
+
+	return false;
+}
 

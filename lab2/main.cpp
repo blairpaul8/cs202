@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-	C4Board game = C4Board();
+	C4Board game;
 	game.play();
 
 	return 0;
