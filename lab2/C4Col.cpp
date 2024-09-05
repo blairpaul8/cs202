@@ -8,16 +8,17 @@ C4Col::C4Col() {
 	}
 	maxDisk = 6;
 }
-
-char C4Col::getDisk(int i) {
-	char disk = column[i];
+//gets the disk from the index "disk" and returns the value
+char C4Col::getDisk(int diskIndex) {
+	char disk = column[diskIndex];
 	return disk;
 }
 
-void C4Col::placeDisk(int i, char player) {
-	column[i] = player;
+//places the disk in the column array.
+void C4Col::placeDisk(int disk, char player) {
+	column[disk] = player;
 }
-
+//returns the maximum number of disks
 int C4Col::getMaxDisks() {
 	return maxDisk;
 }
