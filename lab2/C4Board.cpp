@@ -46,6 +46,10 @@ void C4Board::play() {
 			cout << player << " Wins" << endl;
 			break;
 		}
+    if (turns == maxMoves) {
+      printBoard();
+      cout << "Tie" << endl;
+    }
 		cout << endl;
 		printBoard();
 	}

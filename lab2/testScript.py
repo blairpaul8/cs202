@@ -36,6 +36,6 @@ for test_file in test_files:
             # Print the matched line followed by the correct answer, with 10 spaces in between
             print(f'Result for {test_file}: {match.group()}{ " " * 10 }Correct answer: {correct_answer}')
         else:
-            print(f'Result for {test_file}: No winner found')
+            print(f'Result for {test_file}: Incorrect Answer')
         
         print('-' * 60)
