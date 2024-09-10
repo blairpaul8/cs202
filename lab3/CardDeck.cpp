@@ -4,22 +4,32 @@
 #include <string>
 #include <ctime>
 
+//constructor with fall back value
 CardDeck::CardDeck(int n) {
 	this->n = n;
 	deck = vector<int> (n);
 	for (int i = 0; i < n; i++) {
 		deck[i] = i;
 	}
+  //shuffle();
+}
+
+//copy constructor
+CardDeck::CardDeck(const CardDeck&) {
 
 }
-		
+
+//deconstructor
+CardDeck::~CardDeck() {
+  //delete deck;
+}
+
 int CardDeck::getSize() {
 	return deck.size();
 }
 
-void CardDeck::shuffle() {
-	srand(time(0));
-
+void CardDeck::shuffle(int seed) {
+  srand(seed);
 	for (int i = n - 1; i > 0; i--) {
 		int j = rand() % (i + 1);
 
@@ -31,9 +41,9 @@ int CardDeck::deal() {
 	int card = deck.back();
 	deck.pop_back();
 	
-	int cardNumber = card % 13;
+	//int cardNumber = card % 13;
 
-	return cardNumber;
+	return card;
 }
 
 void CardDeck::printDeck() {
@@ -74,8 +84,8 @@ int CardDeck::cardPointValue(int cardNumber) {
 	if ((cardNumber % 13) == 0) {
 		return 11;
 	}
-	else if ((cardNumber % 13) > 0 && (cardNumber % 13) < 10) {
-		return (cardNumber % 13);
+	else if ((cardNumber % 13) > 0 && (cardNumber % 13) < 9) {
+		return (cardNumber % 13) + 1;
 	}
 	else {
 		return 10;
@@ -85,41 +95,39 @@ int CardDeck::cardPointValue(int cardNumber) {
 void CardDeck::printPlayerHand(vector<int> &a) {
   for (int i = 0; i < a.size(); i++) {
     int card = a[i];
-    string tempCard = cardFaceValue(card);
+    int tempCard = cardValue(card);
     
-    cout << "Card " << i + 1 << ": " << tempCard << "     "; 
+    cout << tempCard << " "; 
   }
   
 }
 
+//I dont think I need this 
+/*
 void CardDeck::printDealerHand(vector<int> &a) {
   int card = a[1];
-  string tempCard = cardFaceValue(card);
+  int tempCard = cardValue(card);
   cout << tempCard;
 
-}
+}*/
 
-string CardDeck::cardFaceValue(int card) {
-  int temp = 0;
+int CardDeck::cardValue(int card) {
   if ((card % 13) == 0) {
-    return "Ace";
+    return 0;
   }
   else if ((card % 13) > 0 && (card % 13) < 10)  {
-    temp = card % 13;
-    string numberCard = to_string(temp);
-    return numberCard;
+    int cardValue = (card % 13) + 1;
+    
+    return cardValue;
   }
   else if ((card % 13) == 10) {
-    string jack = "Jack";
-    return jack;
+    return 10;
   }
   else if ((card % 13) == 11) {
-    string queen = "Queen";
-    return queen;
+    return 11;
   }
   else {
-    string king = "King";
-    return king;
+    return 12;
   }
 }
 
