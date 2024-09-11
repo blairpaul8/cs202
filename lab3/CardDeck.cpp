@@ -24,6 +24,10 @@ CardDeck::~CardDeck() {
   //delete deck;
 }
 
+CardDeck& CardDeck::operator= (const CardDeck&) {
+ return *this;
+} 
+
 int CardDeck::getSize() {
 	return deck.size();
 }

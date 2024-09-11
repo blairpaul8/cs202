@@ -40,6 +40,7 @@ int main() {
 
   //test printing shuffled deck
   CardDeck *testDeck = new CardDeck(10);
+  cout << "Test: Before shuffling..." << endl;
   testDeck->printDeck();
   testDeck->shuffle(seed);
   cout << "Test: after shuffling..." << endl;
@@ -187,6 +188,12 @@ int main() {
     }
     
     cout << "Cards left in the deck: " << deck->getSize() << endl;
+  }
+
+  if (numDealerWins > numPlayerWins) {
+    cout << "---------------------------" << endl;
+    cout << "Dealer wins BlackJack!" << endl;
+    cout << "---------------------------" << endl;
   }
 
   return 0;

@@ -8,6 +8,7 @@ class CardDeck {
 		CardDeck(int n = 52);
     CardDeck(const CardDeck&);
     ~CardDeck();
+    CardDeck& operator= (const CardDeck&);
 		int getSize();
 		void shuffle(int seed);
 		int deal();
