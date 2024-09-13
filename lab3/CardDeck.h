@@ -13,12 +13,10 @@ class CardDeck {
 		void shuffle(int seed);
 		int deal();
 		void printDeck();
-		void printShuffledDeck();
 		void swap(int *a,int *b);
     int scoreHand(vector<int> &a);
 		int cardPointValue(int carNumber);
-		void printPlayerHand(vector<int> &a);
-    //void printDealerHand(vector<int> &a);
+		void printHand(vector<int> &a);
     int cardValue(int card);   
 	
 

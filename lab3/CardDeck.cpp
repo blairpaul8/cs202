@@ -44,9 +44,6 @@ void CardDeck::shuffle(int seed) {
 int CardDeck::deal() {
 	int card = deck.back();
 	deck.pop_back();
-	
-	//int cardNumber = card % 13;
-
 	return card;
 }
 
@@ -57,19 +54,14 @@ void CardDeck::printDeck() {
 	cout << endl;
 }
 
-void CardDeck::printShuffledDeck() {
-	for (int i = 0; i < deck.size(); i++) {
-		cout << deck[i] << ' ';
-	}
-	cout << endl;
-}
-
+//swap function used for my shuffle function.
 void CardDeck::swap(int *a, int *b) {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
+//This function adds up the total point value of the player or dealers hand.
 int CardDeck::scoreHand(vector<int> &a) {
   int totalScore = 0;
   int tempPointValue = 0;
@@ -96,7 +88,9 @@ int CardDeck::cardPointValue(int cardNumber) {
 	}
 }
 
-void CardDeck::printPlayerHand(vector<int> &a) {
+
+//Prints every card in the player or dealers hand.
+void CardDeck::printHand(vector<int> &a) {
   for (int i = 0; i < a.size(); i++) {
     int card = a[i];
     int tempCard = cardValue(card);
@@ -106,15 +100,8 @@ void CardDeck::printPlayerHand(vector<int> &a) {
   
 }
 
-//I dont think I need this 
-/*
-void CardDeck::printDealerHand(vector<int> &a) {
-  int card = a[1];
-  int tempCard = cardValue(card);
-  cout << tempCard;
-
-}*/
-
+//Converts the card from the deck array to the actual point value.
+//example Aces are zero in the deck and need to have a point of 11.
 int CardDeck::cardValue(int card) {
   if ((card % 13) == 0) {
     return 0;
