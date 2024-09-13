@@ -48,7 +48,7 @@ int CardDeck::deal() {
 }
 
 void CardDeck::printDeck() {
-	for (int i = 0; i < deck.size(); i++) {
+	for (size_t i = 0; i < deck.size(); i++) {
 		cout << deck[i] << ' ';
 	}
 	cout << endl;
@@ -65,7 +65,7 @@ void CardDeck::swap(int *a, int *b) {
 int CardDeck::scoreHand(vector<int> &a) {
   int totalScore = 0;
   int tempPointValue = 0;
-  for (int i = 0; i < a.size(); i++) {
+  for (size_t i = 0; i < a.size(); i++) {
     tempPointValue = cardPointValue(a[i]);
     //cout << endl << "Card Point value is: " << tempPointValue << endl;
     totalScore += tempPointValue;
@@ -91,7 +91,7 @@ int CardDeck::cardPointValue(int cardNumber) {
 
 //Prints every card in the player or dealers hand.
 void CardDeck::printHand(vector<int> &a) {
-  for (int i = 0; i < a.size(); i++) {
+  for (size_t i = 0; i < a.size(); i++) {
     int card = a[i];
     int tempCard = cardValue(card);
     

@@ -7,7 +7,7 @@ using namespace std;
 
 //print hand helper function
 void printDealerHand(vector<int> &a) {
-  for (int i = 0; i < a.size(); i++) {
+  for (size_t i = 0; i < a.size(); i++) {
     cout << a[i] << " ";
   }
   cout << endl;
@@ -15,7 +15,7 @@ void printDealerHand(vector<int> &a) {
 
 //print hand helper function
 void printPlayerHand(vector<int> &a) {
-  for (int i = 0; i < a.size(); i++) {
+  for (size_t i = 0; i < a.size(); i++) {
     cout << a[i] << " ";
   }
   cout << endl;
