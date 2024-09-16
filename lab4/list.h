@@ -1,20 +1,20 @@
-#ifdef LIST_H
+
 #include <iostream>
 
 class Node {
 
   public:
     Node (const int &info);
-    int getData(const int&);
-
+    int getData();
+    Node *next;
+  
   private:
     int data;
-    Node *next;
 
 };
 
 
-class LinkedList {
+/*class LinkedList {
 
   public:
     LinkedList();
@@ -24,5 +24,5 @@ class LinkedList {
   private:
     Node * head;
 };
+*/
 
-#endif // LIST_H

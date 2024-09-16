@@ -1,4 +1,9 @@
-/*  insert comments here */
+/*Lab4 Blackjack
+ * Name: Paul Blair
+ * NET Id: VBQ669
+ * Description: This program is the standard game of Blackjack with one deck of
+ * 52 and Aces are always 11
+ *  */
 #include <ctime>
 #include <iostream>
 #include "CardDeck.h"   // class definition for CardDeck used below
@@ -119,11 +124,11 @@ int main() {
     cout << endl << "---------------------------" << endl;
     playerTotalScore = deck->scoreHand(playerHand);
     cout << "Player | ";
-    cout << "Total hand = " << playerTotalScore << " | ";
+    cout << "Total hand = " << playerTotalScore << " | Cards: ";
     deck->printHand(playerHand);
     cout << endl << "Dealer | ";
     dealerTotalScore = deck->scoreHand(dealerHand);
-    cout << "Total hand = " << dealerTotalScore << " | ";
+    cout << "Total hand = " << dealerTotalScore << " | Cards: ";
     deck->printHand(dealerHand);
     cout << endl << endl;
 
