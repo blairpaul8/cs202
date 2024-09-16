@@ -76,7 +76,7 @@ void printList(const LinkedList &a) {
 pair<string, string> parseInput(string input) {
   pair <string, string> values;
   char space = '\0';
-  for (int i = 0; i < input.size(); i++) {
+  for (size_t i = 0; i < input.size(); i++) {
     if (input[i] == ' ') {
       space = ' ';
       continue;
@@ -93,9 +93,9 @@ pair<string, string> parseInput(string input) {
 
 //uses insertAtBegin to push each element of value1 and value2 onto thier respective LinkedList.
 void addNodes(pair <string, string> values, LinkedList &num1, LinkedList &num2) {
-  int size = max(values.first.size(), values.second.size());
+  unsigned long size = max(values.first.size(), values.second.size());
   
-  for (int i = 0; i < size; i++ ) {
+  for (unsigned long i = 0; i < size; i++ ) {
     if (i >= values.first.size()) {
       num1.insertAtEnd(0);
     }
