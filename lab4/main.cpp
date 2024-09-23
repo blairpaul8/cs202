@@ -11,7 +11,6 @@
 #include <string>
 using namespace std;
 
-//Used a struct for the LinkedList instead of a class.
 struct LinkedList {
   
   public:

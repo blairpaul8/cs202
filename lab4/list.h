@@ -12,17 +12,3 @@ class Node {
     int data;
 
 };
-
-
-/*class LinkedList {
-
-  public:
-    LinkedList();
-    void insertAtBegin(int data);
-    void insertAtEnd(int data);
-
-  private:
-    Node * head;
-};
-*/
-

@@ -6,7 +6,7 @@ Node::Node(const int&info) {
   next = nullptr;
 }
 
-//constructor for the Nodes
+//Function to access the data in the node.
 int Node::getData() {
   return this->data;
 }
