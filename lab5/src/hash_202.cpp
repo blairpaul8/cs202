@@ -30,7 +30,7 @@ int Last7(const string &key) {
   ss.clear();
   ss.str(hexValue);
   ss >> hex >> num;
-  cout << "Last 7 is: " << num << endl;
+  //cout << "Last 7 is: " << num << endl;
   return num;
 }
 
@@ -72,11 +72,11 @@ string Hash_202::Set_Up(size_t table_size, const std::string &fxn, const std::st
     return "Bad table size";
   }
 
-  if (fxn != "Linear" || fxn != "Double") {
+  if (fxn != "Last7" && fxn != "XOR") {
     return "Bad hash function";
   }
 
-  if (collision != "Last7" || collision != "Double") {
+  if (collision != "Linear" && collision != "Double") {
     return "Bad collision resolution strategy";
   }
     //sets the value for which hash function will be used.
@@ -145,7 +145,7 @@ string Hash_202::Add(const string &key, const string &val) {
   //XOR Adding 
   if (this->Fxn == 0) {
     int keyXOR = XOR(key);
-    cout << "key XOR: " << keyXOR << endl;
+   // cout << "key XOR: " << keyXOR << endl;
     index = keyXOR % this->Keys.size();
   }
 
@@ -207,13 +207,13 @@ string Hash_202::Find(const string &key) {
   if (this-> Fxn == 1) {
     int keyLast7 = Last7(key);
     index = keyLast7 % this->Keys.size();
-    cout << "Find index is: " << index << endl;
+   // cout << "Find index is: " << index << endl;
   }
 
   //XOR Find functionality
   if (this->Fxn == 0) {
     int keyXOR = XOR(key);
-    cout << "key XOR: " << keyXOR << endl;
+   // cout << "key XOR: " << keyXOR << endl;
     index = keyXOR % this->Keys.size();
   }
 
