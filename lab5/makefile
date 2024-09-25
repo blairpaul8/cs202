@@ -11,7 +11,7 @@ all: $(ALL)
 # "make clean" deletes the object files and binaries
 
 clean:
-	rm -f obj/* bin/*
+	rm -f obj/* bin/hash_tester bin/read_as_hex
 
 # -------------------------
 # Object files
