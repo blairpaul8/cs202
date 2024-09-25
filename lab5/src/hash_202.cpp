@@ -66,7 +66,7 @@ string Hash_202::Set_Up(size_t table_size, const std::string &fxn, const std::st
     return "Hash table already set up";
   }
 
-  if (table_size !> 0 || table_size !< 100000) {
+  if (table_size == 0 || table_size > 100000) {
     return "Bad table size";
   }
 
