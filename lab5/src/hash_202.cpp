@@ -120,12 +120,12 @@ string Hash_202::Add(const string &key, const string &val) {
 	}
 
 	for (size_t i = 0; i < this->Keys.size(); i++) {
-		int elementCount = 0;
 		if (this->Keys[i] == " ") {
 			break;
 		}
 
 		if (i == this->Keys.size() - 1 && this->Keys[i] != " "){
+      cerr << "Is table full?" << endl;
 			string full = "Hash table full";
 			return full;
 		}
