@@ -193,16 +193,10 @@ string Hash_202::Add(const string &key, const string &val) {
 		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
-<<<<<<< HEAD
 			//the line below doesnt work do the math with example 7 fred-5 the offset is 25
 			newIndex += index;
 			cerr << "Index in while loop: " << newIndex << endl;
 			newIndex = newIndex % this->Keys.size();
-=======
-			newIndex += offset;
-			newIndex = (newIndex + offset) % this->Keys.size();
-
->>>>>>> 137c57a90a146c07f2fc7fb41f43335adc096020
 		}
 
 		if (this->Keys[newIndex] != " ") {
