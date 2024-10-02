@@ -1,0 +1,8 @@
+Offsets after Last7: 19
+NewIndex after index + offset = 21
+Index in while loop: 3
+Index in while loop: 5
+Offsets after Last7: 25
+NewIndex after index + offset = 28
+Index is: 3
+Offset is: 25

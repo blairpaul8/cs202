@@ -125,7 +125,7 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 
 		if (i == this->Keys.size() - 1 && this->Keys[i] != " "){
-      cerr << "Is table full?" << endl;
+     		cerr << "Is table full?" << endl;
 			string full = "Hash table full";
 			return full;
 		}
@@ -168,9 +168,15 @@ string Hash_202::Add(const string &key, const string &val) {
 	//Add Double hashing collision 
 	if (this->Coll == 'D') {
 		int offset = 0;
+		if (this->Keys[index] == " ") {
+			this->Keys[index] = key;
+			this->Vals[index] = val;
+			return "";
+		}
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
 			offset = Last7(key);
+			cerr << "Offsets after Last7: " << offset << endl;
 			if (offset == 0) {
 				offset = 1;
 			}
@@ -182,15 +188,20 @@ string Hash_202::Add(const string &key, const string &val) {
 				offset = 1;
 			}
 		}
-		int newIndex = index;
+		int newIndex = index + offset;
+		cerr<< "NewIndex after index + offset = " << newIndex << endl;
+		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
-			newIndex += offset;
+			//the line below doesnt work do the math with example 7 fred-5 the offset is 25
+			newIndex += index;
+			cerr << "Index in while loop: " << newIndex << endl;
 			newIndex = newIndex % this->Keys.size();
-
 		}
 
 		if (this->Keys[newIndex] != " ") {
+			cerr << "Index is: " << newIndex << endl;
+			cerr << "Offset is: " << offset << endl;
 			return "Cannot insert key";
 		}
 
