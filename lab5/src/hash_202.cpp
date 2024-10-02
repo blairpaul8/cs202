@@ -265,20 +265,23 @@ string Hash_202::Find(const string &key) {
 			}
 		}
 		int newIndex = index;
+    int initialIndex = index;
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
-			this->Nprobes += 1;
+	    if (this->Keys[index] == key) {
+		    return this->Vals[index];
+	    }
+			
+      this->Nprobes += 1;
 			newIndex = (newIndex + offset) % this->Keys.size();
+
+      if (newIndex == initialIndex) {
+        break;
+      }
 
 		}
 		index = newIndex;
 	}
-
-	if (this->Keys[index] == key) {
-		return this->Vals[index];
-	}
-
-
 	return "";
 }
 
