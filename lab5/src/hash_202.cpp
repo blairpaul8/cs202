@@ -186,7 +186,7 @@ string Hash_202::Add(const string &key, const string &val) {
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
 			newIndex += offset;
-			newIndex = newIndex % this->Keys.size();
+			newIndex = (newIndex + offset) % this->Keys.size();
 
 		}
 
