@@ -125,7 +125,7 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 
 		if (i == this->Keys.size() - 1 && this->Keys[i] != " "){
-     		cerr << "Is table full?" << endl;
+     		//cerr << "Is table full?" << endl;
 			string full = "Hash table full";
 			return full;
 		}
@@ -175,33 +175,39 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
-			offset = Last7(key);
-			cerr << "Offsets after Last7: " << offset << endl;
+			offset = Last7(key) % this->Keys.size();
+			//cerr << "Offsets after Last7: " << offset << endl;
 			if (offset == 0) {
 				offset = 1;
 			}
 		}
 		//if the first has function was Last7 use XOR
 		else if (this->Fxn == 1) {
-			offset = XOR(key);
+			offset = XOR(key) % this->Keys.size();
 			if (offset == 0) {
 				offset = 1;
 			}
 		}
 		int newIndex = index + offset;
-		cerr<< "NewIndex after index + offset = " << newIndex << endl;
+		int initialIndex = index;
+		bool wrappedAround = false;
+		//cerr<< "NewIndex after index + offset = " << newIndex << endl;
 		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
 			//the line below doesnt work do the math with example 7 fred-5 the offset is 25
-			newIndex += index;
-			cerr << "Index in while loop: " << newIndex << endl;
-			newIndex = newIndex % this->Keys.size();
+			//cerr << "Index in while loop: " << newIndex << endl;
+			newIndex = (newIndex + offset) % this->Keys.size();
+
+			if (newIndex == initialIndex) {
+				wrappedAround = true;
+				break;
+			}
 		}
 
-		if (this->Keys[newIndex] != " ") {
-			cerr << "Index is: " << newIndex << endl;
-			cerr << "Offset is: " << offset << endl;
+		if (wrappedAround || this->Keys[newIndex] != " ") {
+			//cerr << "Index is: " << newIndex << endl;
+			//cerr << "Offset is: " << offset << endl;
 			return "Cannot insert key";
 		}
 
@@ -246,14 +252,14 @@ string Hash_202::Find(const string &key) {
 		int offset = 0;
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
-			offset = Last7(key);
+			offset = Last7(key) % this->Keys.size();
 			if (offset == 0) {
 				offset = 1;
 			}
 		}
 		//if the first has function was Last7 use XOR
 		else if (this->Fxn == 1) {
-			offset = XOR(key);
+			offset = XOR(key) % this->Keys.size();
 			if (offset == 0) {
 				offset = 1;
 			}
@@ -262,8 +268,7 @@ string Hash_202::Find(const string &key) {
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
 			this->Nprobes += 1;
-			newIndex += offset;
-			newIndex = newIndex % this->Keys.size();
+			newIndex = (newIndex + offset) % this->Keys.size();
 
 		}
 		index = newIndex;
