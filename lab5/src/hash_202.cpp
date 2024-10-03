@@ -125,7 +125,7 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 
 		if (i == this->Keys.size() - 1 && this->Keys[i] != " "){
-     		//cerr << "Is table full?" << endl;
+			//cerr << "Is table full?" << endl;
 			string full = "Hash table full";
 			return full;
 		}
@@ -238,17 +238,21 @@ string Hash_202::Find(const string &key) {
 	//Linear Collision 
 	if (this->Coll == 'L' && this->Keys[index] != key) {
 		while (this->Keys[index] != key) {
+
 			if (this->Keys[index] == " ") {
 				break;
 			}
 			this->Nprobes += 1;
 			index += 1;
 			index = index % this->Keys.size();
+			if (this->Keys[index] == key) {
+				return this->Vals[index];
+			}
 		}
 	}
 
 	//Write double has:hing Collision
-	if (this->Coll == 'D') {
+	if (this->Coll == 'D' && this->Keys[index] != key) {
 		int offset = 0;
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
@@ -265,22 +269,26 @@ string Hash_202::Find(const string &key) {
 			}
 		}
 		int newIndex = index;
-    int initialIndex = index;
+		int initialIndex = index;
 
-		while (this->Keys[newIndex] != " " && newIndex != index) {
-	    if (this->Keys[index] == key) {
-		    return this->Vals[index];
-	    }
-			
-      this->Nprobes += 1;
+
+		if (this->Keys[newIndex] == key) {
+			this->Nprobes += 1;
+			return this->Vals[newIndex];
+		}
+
+		while (true) {
+			this->Nprobes += 1;
 			newIndex = (newIndex + offset) % this->Keys.size();
 
-      if (newIndex == initialIndex) {
-        break;
-      }
+			if (this->Keys[newIndex] == " ") {
+				break;
+			}
+			if (this->Keys[newIndex] == key) {
+				return this->Vals[newIndex];
+			}
 
 		}
-		index = newIndex;
 	}
 	return "";
 }
