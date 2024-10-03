@@ -10,7 +10,7 @@ using namespace std;
 //Checks if a given string is a valid hexadecimal  
 bool checkHexNum(const string &key) {
 	for (size_t i = 0; i < key.size(); i++)
-		if ((key[i] >= '0' && key[i] <= '9') || (key[i] >= 'a' && key[i] <= 'z') ) {
+		if ((key[i] >= '0' && key[i] <= '9') || (key[i] >= 'a' && key[i] <= 'f') ) {
 			continue;
 		}
 		else {
@@ -59,16 +59,12 @@ int XOR(const string &key) {
 	return xorValue;
 }
 
-//Computes an index based on given string, hash function, and collision resolution.
-//int getHashIndex(//TODO not sure what to put here yet)
-
-
 string Hash_202::Set_Up(size_t table_size, const std::string &fxn, const std::string &collision) {
 	if (this->Keys.size() > 0) {
 		return "Hash table already set up";
 	}
 
-	if (table_size == 0 || table_size > 100000) {
+	if (table_size == 0) {
 		return "Bad table size";
 	}
 
@@ -118,19 +114,16 @@ string Hash_202::Add(const string &key, const string &val) {
 		string emptyVal = "Empty val";
 		return emptyVal;
 	}
-
+	
 	for (size_t i = 0; i < this->Keys.size(); i++) {
 		if (this->Keys[i] == " ") {
 			break;
 		}
-
-		if (i == this->Keys.size() - 1 && this->Keys[i] != " "){
-			//cerr << "Is table full?" << endl;
+		if (i == this->Keys.size() - 1 && this->Keys[i] != " ") {
 			string full = "Hash table full";
 			return full;
 		}
 	}
-	//Need to write cannot insert key
 
 	if (find(this->Keys.begin(), this->Keys.end(), key) != this->Keys.end()) {
 		string usedKey = "Key already in the table";
@@ -158,8 +151,6 @@ string Hash_202::Add(const string &key, const string &val) {
 			index += 1;
 			index = index % this->Keys.size();
 		}
-
-
 		this->Keys[index] = key;
 		this->Vals[index] = val;
 	}
@@ -191,12 +182,9 @@ string Hash_202::Add(const string &key, const string &val) {
 		int newIndex = index + offset;
 		int initialIndex = index;
 		bool wrappedAround = false;
-		//cerr<< "NewIndex after index + offset = " << newIndex << endl;
 		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
-			//the line below doesnt work do the math with example 7 fred-5 the offset is 25
-			//cerr << "Index in while loop: " << newIndex << endl;
 			newIndex = (newIndex + offset) % this->Keys.size();
 
 			if (newIndex == initialIndex) {
@@ -206,8 +194,6 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 
 		if (wrappedAround || this->Keys[newIndex] != " ") {
-			//cerr << "Index is: " << newIndex << endl;
-			//cerr << "Offset is: " << offset << endl;
 			return "Cannot insert key";
 		}
 
@@ -225,13 +211,11 @@ string Hash_202::Find(const string &key) {
 	if (this-> Fxn == 1) {
 		int keyLast7 = Last7(key);
 		index = keyLast7 % this->Keys.size();
-		// cout << "Find index is: " << index << endl;
 	}
 
 	//XOR Find functionality
 	if (this->Fxn == 0) {
 		int keyXOR = XOR(key);
-		// cout << "key XOR: " << keyXOR << endl;
 		index = keyXOR % this->Keys.size();
 	}
 
@@ -240,9 +224,9 @@ string Hash_202::Find(const string &key) {
     if (this->Keys[index]  == key) {
       return this->Vals[index];
     }
-
+		int initialIndex = index;
 		while (this->Keys[index] != key) {
-			int initialIndex = index;
+			
 			if (this->Keys[index] == " ") {
 				break;
 			}
