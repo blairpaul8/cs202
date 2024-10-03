@@ -10,12 +10,11 @@ using namespace std;
 //Checks if a given string is a valid hexadecimal  
 bool checkHexNum(const string &key) {
 	for (size_t i = 0; i < key.size(); i++)
-		if ((key[i] - '0' < 0 || key[i] - '0' > 9) && (key[i] < 'a' || key[i] > 'z') 
-				&& (key[i] < 'A' || key[i] > 'Z')) {
-			return true;
+		if ((key[i] >= '0' && key[i] <= '9') || (key[i] >= 'a' && key[i] <= 'z') ) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 }
 
@@ -110,7 +109,7 @@ string Hash_202::Add(const string &key, const string &val) {
 	}
 
 	if (checkHexNum(key)) {
-		string badKey = "Bad key (not all hex digits";
+		string badKey = "Bad key (not all hex digits)";
 		return badKey;
 	}
 
@@ -240,14 +239,19 @@ string Hash_202::Find(const string &key) {
     if (this->Keys[index]  == key) {
       return this->Vals[index];
     }
-		while (this->Keys[index] != key) {
 
+		while (this->Keys[index] != key) {
+			int initialIndex = index;
 			if (this->Keys[index] == " ") {
 				break;
 			}
 			this->Nprobes += 1;
 			index += 1;
 			index = index % this->Keys.size();
+			if (index == initialIndex) {
+				break;
+			}
+
 			if (this->Keys[index] == key) {
 				return this->Vals[index];
 			}
@@ -255,7 +259,11 @@ string Hash_202::Find(const string &key) {
 	}
 
 	//Write double has:hing Collision
-	if (this->Coll == 'D' && this->Keys[index] != key) {
+	if (this->Coll == 'D') {
+		if (this->Keys[index] == key) {
+			return this->Vals[index];
+		}
+
 		int offset = 0;
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
@@ -284,7 +292,7 @@ string Hash_202::Find(const string &key) {
 			this->Nprobes += 1;
 			newIndex = (newIndex + offset) % this->Keys.size();
 
-			if (this->Keys[newIndex] == " ") {
+			if (newIndex == initialIndex) {
 				break;
 			}
 			if (this->Keys[newIndex] == key) {
