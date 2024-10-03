@@ -236,7 +236,10 @@ string Hash_202::Find(const string &key) {
 	}
 
 	//Linear Collision 
-	if (this->Coll == 'L' && this->Keys[index] != key) {
+	if (this->Coll == 'L') {
+    if (this->Keys[index]  == key) {
+      return this->Vals[index];
+    }
 		while (this->Keys[index] != key) {
 
 			if (this->Keys[index] == " ") {
