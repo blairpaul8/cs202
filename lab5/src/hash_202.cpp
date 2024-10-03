@@ -11,11 +11,12 @@ using namespace std;
 bool checkHexNum(const string &key) {
 	for (size_t i = 0; i < key.size(); i++)
 		if ((key[i] >= '0' && key[i] <= '9') || (key[i] >= 'a' && key[i] <= 'z') ) {
-			return false;
+			continue;
 		}
 		else {
 			return true;
 		}
+	return false;
 }
 
 //Computes Last7 has on given string.
