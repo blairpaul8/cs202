@@ -186,26 +186,18 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 		int newIndex = index + offset; //index after double hashing
 		int initialIndex = index; //keeps track of the starting index before double hashing
-		bool wrappedAround = false;
 		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
 			newIndex = (newIndex + offset) % this->Keys.size();
 			
-			/*In the event that the collisions go through the entire array
-			  and you get back to the starting index before double hashing
-			  wrappedAround is set to true and breaks. This means the key cannot
-			  be inserted.*/
 			if (newIndex == initialIndex) {
-				wrappedAround = true;
 				break;
 			}
 		}
-
-		if (wrappedAround || this->Keys[newIndex] != " ") {
+		if ((newIndex == initialIndex) || this->Keys[newIndex] != " ") {
 			return "Cannot insert key";
 		}
-
 		this->Keys[newIndex] = key;
 		this->Vals[newIndex] = val;
 		this->Nkeys += 1;
@@ -253,7 +245,7 @@ string Hash_202::Find(const string &key) {
 		}
 	}
 
-	//Write double has:hing Collision
+	//Double hashing Collision
 	if (this->Coll == 'D') {
 		if (this->Keys[index] == key) {
 			return this->Vals[index];
