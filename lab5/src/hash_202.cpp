@@ -1,3 +1,13 @@
+/* Program Name: Hash Tables
+ * Name: Paul Blair
+ * Net ID: VBQ669
+ * Program Description: This program takes in command line arguments to set the type of hashing function that will be 
+ * used (XOR or Last7), hash table size, and type of collision resolution (Linear or Double Hashing). Once the program 
+ * the user can use different functions to add key value pairs to the hash table, find values in the hash table, print
+ * the hash table, and also print the total number of probes to find each value in the hash table.
+ */
+
+
 #include "hash_202.hpp"
 #include <string>
 #include <iostream>
@@ -30,7 +40,6 @@ int Last7(const string &key) {
 	ss.clear();
 	ss.str(hexValue);
 	ss >> hex >> num;
-	//cout << "Last 7 is: " << num << endl;
 	return num;
 }
 
@@ -91,6 +100,7 @@ string Hash_202::Set_Up(size_t table_size, const std::string &fxn, const std::st
 	}
 	this->Keys = vector<string> (table_size, " ");
 	this->Vals = vector<string> (table_size, " "); 
+	this->Nkeys = 0;
 	return "";
 }
 
@@ -115,14 +125,9 @@ string Hash_202::Add(const string &key, const string &val) {
 		return emptyVal;
 	}
 	
-	for (size_t i = 0; i < this->Keys.size(); i++) {
-		if (this->Keys[i] == " ") {
-			break;
-		}
-		if (i == this->Keys.size() - 1 && this->Keys[i] != " ") {
-			string full = "Hash table full";
-			return full;
-		}
+	if ((this->Nkeys) == this->Keys.size()) {
+		string full = "Hash table full";
+		return full;
 	}
 
 	if (find(this->Keys.begin(), this->Keys.end(), key) != this->Keys.end()) {
@@ -131,16 +136,15 @@ string Hash_202::Add(const string &key, const string &val) {
 	} 
 
 	int index;
-	//Last7 Adding
+	//Last7 hashing
 	if (this->Fxn == 1) {
 		int keyLast7 = Last7(key);
 		index = keyLast7 % this->Keys.size();
 	}
 
-	//XOR Adding 
+	//XOR hashing 
 	if (this->Fxn == 0) {
 		int keyXOR = XOR(key);
-		// cout << "key XOR: " << keyXOR << endl;
 		index = keyXOR % this->Keys.size();
 	}
 
@@ -153,6 +157,7 @@ string Hash_202::Add(const string &key, const string &val) {
 		}
 		this->Keys[index] = key;
 		this->Vals[index] = val;
+		this->Nkeys += 1;
 	}
 
 
@@ -162,12 +167,12 @@ string Hash_202::Add(const string &key, const string &val) {
 		if (this->Keys[index] == " ") {
 			this->Keys[index] = key;
 			this->Vals[index] = val;
+			this->Nkeys += 1;
 			return "";
 		}
 		//if the first hash function was XOR use Last7
 		if (this->Fxn == 0) {
 			offset = Last7(key) % this->Keys.size();
-			//cerr << "Offsets after Last7: " << offset << endl;
 			if (offset == 0) {
 				offset = 1;
 			}
@@ -179,14 +184,18 @@ string Hash_202::Add(const string &key, const string &val) {
 				offset = 1;
 			}
 		}
-		int newIndex = index + offset;
-		int initialIndex = index;
+		int newIndex = index + offset; //index after double hashing
+		int initialIndex = index; //keeps track of the starting index before double hashing
 		bool wrappedAround = false;
 		newIndex = newIndex % this->Keys.size();
 
 		while (this->Keys[newIndex] != " " && newIndex != index) {
 			newIndex = (newIndex + offset) % this->Keys.size();
-
+			
+			/*In the event that the collisions go through the entire array
+			  and you get back to the starting index before double hashing
+			  wrappedAround is set to true and breaks. This means the key cannot
+			  be inserted.*/
 			if (newIndex == initialIndex) {
 				wrappedAround = true;
 				break;
@@ -199,6 +208,7 @@ string Hash_202::Add(const string &key, const string &val) {
 
 		this->Keys[newIndex] = key;
 		this->Vals[newIndex] = val;
+		this->Nkeys += 1;
 	}
 
 	return "";
@@ -292,7 +302,7 @@ string Hash_202::Find(const string &key) {
 void Hash_202::Print() const {
 	for (size_t i = 0; i < this->Keys.size(); i++) {
 		if (this->Keys[i] != " ") {
-			printf("%5d %s %s\n", i, this->Keys[i].c_str(), this->Vals[i].c_str());
+			printf("%5zu %s %s\n", i, this->Keys[i].c_str(), this->Vals[i].c_str());
 		}
 	}
 }
