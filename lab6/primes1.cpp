@@ -6,7 +6,7 @@ using namespace std;
 
 void isPrime(int n) {
   vector<int> primes;
-  /* bool prime[n + 1];
+   bool prime[n + 1];
      memset(prime, true, sizeof(prime));
 
      for (int i = 2; i * i <= n; i++) {
@@ -18,8 +18,8 @@ void isPrime(int n) {
      }
      }
      }
-     */
-  for (int i = 2; i <= n; i++) {
+     
+/*  for (int i = 2; i <= n; i++) {
     int j = 1;
     int divisorCount = 0;
     while (j <= n) {
@@ -46,8 +46,8 @@ void isPrime(int n) {
     }
     
   }
-  cout << endl;
-  /*int printCount = 0;
+  cout << endl; */
+  int printCount = 0;
     for (int i = 2; i <= n; i++) {
     if (prime[i]) {
     cout << i;
@@ -60,7 +60,7 @@ void isPrime(int n) {
     }
     }
     }
-    cout << endl;*/
+    cout << endl;
 }
 
 int main (int argc, char **argv) {
