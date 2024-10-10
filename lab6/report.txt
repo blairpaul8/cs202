@@ -1,0 +1,9 @@
+Name: Paul Blair
+Net ID: VBQ669
+
+This report is based on  as the input value.
+
+Make test using find()
+- Test 1: 3.12s
+- Test 2: 3.12s
+- Test 3: 3.12s

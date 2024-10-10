@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <map>
 #include <cmath>
 
 using namespace std;
@@ -35,29 +36,48 @@ int main(int argc, char *argv[]) {
   int temp;
   int currentMax = 0;
   vector<int> currentPrimes;
+  vector<int> zeroOrOne(currentMax, 0);
+  map<int, string> primesMap;
   cin.clear();
   while (cin >> temp) {
 
     if (temp > currentMax || currentMax == 0) {
       currentMax = temp;
+      zeroOrOne = vector<int> (currentMax + 1, 0);
 
       for (int i = 0; i <= currentMax; i++) {
         if (isPrime(i)) {
+          primesMap[i] = "prime";
           currentPrimes.push_back(i);
+          zeroOrOne[i] = 1;
+        }
+        else {
+          primesMap[i] = "not prime";
         }
       }
       //printPrimes(currentPrimes);
     }
-    if (find(currentPrimes.begin(), currentPrimes.end(), temp) != currentPrimes.end()) {
+    // Using find 
+    //if (find(currentPrimes.begin(), currentPrimes.end(), temp) != currentPrimes.end()) {
+    
+    // Using Binary Serach
+    //if (binary_search(currentPrimes.begin(), currentPrimes.end(), temp)) {
+    //
+    //using the user input as the index to find the value and wether it is 
+    //prime or not.
+    /*if (zeroOrOne[temp] == 1) { 
       cout << "prime" << endl;
     }
-
     else {
       cout << "not prime" << endl;
+    }*/ 
+    if (primesMap.find(temp) != primesMap.end()) {
+      cout << primesMap[temp] << endl; 
     }
 
 
   }
+  //printPrimes(zeroOrOne);
 
 
 return 0;
