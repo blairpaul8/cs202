@@ -1,3 +1,8 @@
+/* Name: Paul Blair
+ * Net ID: VBQ669
+ * Description: This program takes in a value from the command line arguments 
+ *              and will print out all the prime numbers from 0 - n to the console.
+*/
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -6,26 +11,15 @@ using namespace std;
 
 void isPrime(int n) {
   vector<int> primes;
-   bool prime[n + 1];
-     memset(prime, true, sizeof(prime));
-
-     for (int i = 2; i * i <= n; i++) {
-     if (prime[i] == true) {
-
-     for (int j = i * i; j <= n; j += i) {
-     prime[j] = false;
-
-     }
-     }
-     }
      
-/*  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i <= n; i++) {
     int j = 1;
     int divisorCount = 0;
     while (j <= n) {
       if (i % j == 0) {
         divisorCount += 1;
       }
+      //if the number is divisible by more than 1 or itself it isnt prime.
       if (divisorCount > 2) {
         break;
       }
@@ -36,31 +30,18 @@ void isPrime(int n) {
     }
   }
 
+  //Used for printing all the prime values.
   for (int i = 0; i < primes.size(); i++) {
     cout << primes[i];
     if (i != (primes.size() - 1)) {
       cout << ", ";
     }
-    if (i == 20) {
+    if (i % 19 == 0 && i != 0) {
       cout << endl;
     }
     
   }
-  cout << endl; */
-  int printCount = 0;
-    for (int i = 2; i <= n; i++) {
-    if (prime[i]) {
-    cout << i;
-    if (i != n) {
-    cout << ", ";
-    }
-    printCount += 1;
-    if (printCount % 20 == 0) {
-    cout << endl;
-    }
-    }
-    }
-    cout << endl;
+  cout << endl; 
 }
 
 int main (int argc, char **argv) {

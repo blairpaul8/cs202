@@ -1,9 +1,28 @@
 Name: Paul Blair
 Net ID: VBQ669
 
-This report is based on  as the input value.
+This report is based on 20,000,000 as the input value.
 
-Make test using find()
-- Test 1: 3.12s
-- Test 2: 3.12s
-- Test 3: 3.12s
+Load Factor = 6.35%
+# of primes in 20,000,000 is 1,270,607
+
+test using find()
+- Test 1: 3.30s 
+- Test 2: 3.11s 
+- Test 3: 3.15s
+
+test using a vector of 0's and 1's. 1 denoting prime and 
+0 denoting not prime.
+- Test 1: 3.48s 
+- Test 2: 3.30s 
+- Test 3: 3.31s  
+
+test using binary_search()
+- Test 1: 3.11s
+- Test 2: 3.13s 
+- Test 3: 3.13s 
+
+test using map
+- Test 1: 15.44s
+- Test 2: 15.31s
+- Test 3: 15.28s
