@@ -24,8 +24,8 @@ void print_board(vector<int>& board) {
 
 bool check(vector<int>& board, int col) {
   // check horizontal
-  for (size_t i = 0; i < col; i++) {
-    for (size_t j = 0; j < col; j++) {
+  for (int i = 0; i < col; i++) {
+    for (int j = 0; j < col; j++) {
       //This case the values at board[i] and board[j] will always be equal
       //so it needs to be skipped.
       if (i == j) {
@@ -37,8 +37,8 @@ bool check(vector<int>& board, int col) {
     }
   }
   //check diagonal
-  for (size_t i = 0; i < col; i++) {
-    for (size_t j = 0; j < col; j++) {
+  for (int i = 0; i < col; i++) {
+    for (int j = 0; j < col; j++) {
       if (i == j) {
         continue;
       }
@@ -51,7 +51,7 @@ bool check(vector<int>& board, int col) {
 }
 
 void nqueens(vector<int>& board, int pos) {
-  if (pos == board.size()) {
+  if (pos == (int)board.size()) {
     print_board(board);
   }
   else {

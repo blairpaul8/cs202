@@ -43,7 +43,7 @@ bool check(vector<int>& board) {
 }
 
 void nqueens(vector<int>& board, int pos) {
-  if (pos == board.size()) {
+  if ((size_t)pos == board.size()) {
     if (check(board)) {
       print_board(board);
     } 
