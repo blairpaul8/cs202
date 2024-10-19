@@ -1,0 +1,26 @@
+Name: Paul Blair
+Net ID: VBQ669
+
+n = 8:
+  There are 92 solutions out of 15,720 considered to find a valid
+  solutions with nqueen2.
+
+n = 10
+  There are 724 solutions out of 348,150 considered to find a valid
+  solution with nqueen2.
+
+- In your own words, what is the benefit of a recursive solution to
+enumerate all of the nqueens potential solutions
+
+It can be beneficial to enumerate all possible solutions in a problem where you 
+are trying to find subsets of a given set of data. Also, it can be helpful for 
+traversing a tree data structure. 
+
+- Also in your own words, what are the theoretical and/or practical
+advantages of constraining the search space to only still valid 
+solutions?
+
+By restraining the search space to only valid solutions increases efficiency 
+of the program. Also, if this was a program that the valid solutions needed to 
+be stored in a data structure this would decrease the amount of memory that would
+be used.
