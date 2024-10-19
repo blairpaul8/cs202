@@ -54,6 +54,7 @@ void nqueens(vector<int>& board, int pos) {
   if (pos == (int)board.size()) {
     print_board(board);
   }
+
   else {
     for (size_t i = 0; i < board.size(); i++) {
       board[pos] = i;
@@ -78,5 +79,6 @@ int main(int argc, char *argv[]) {
   }
   int n = atoi(argv[1]);
   num_queens(n);
+
   return 0;
 }
