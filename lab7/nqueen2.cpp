@@ -26,7 +26,7 @@ bool check(vector<int>& board, int col) {
   // check horizontal
   for (int i = 0; i < col; i++) {
     for (int j = 0; j < col; j++) {
-      //This case the values at board[i] and board[j] will always be equal
+      //In this case the values at board[i] and board[j] will always be equal
       //so it needs to be skipped.
       if (i == j) {
         continue;
