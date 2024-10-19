@@ -10,8 +10,6 @@
 #include <cmath>
 using namespace std;
 
-int solutions = 0;
-
 void print_board(vector<int>& board) {
   for (size_t i = 0; i < board.size(); i++) {
     printf("%d", board[i]);
@@ -44,6 +42,7 @@ bool check(vector<int>& board) {
 
 void nqueens(vector<int>& board, int pos) {
   if ((size_t)pos == board.size()) {
+    //Make sure it is a valid board before printing.
     if (check(board)) {
       print_board(board);
     } 
@@ -52,6 +51,7 @@ void nqueens(vector<int>& board, int pos) {
   else {
     for (size_t i = 0; i < board.size(); i++) {
       board[pos] = i;
+      //recursive function call.
       nqueens(board, pos + 1);
     }
   }
@@ -61,7 +61,6 @@ void num_queens(int n) {
   vector<int> board;
   int pos = 0;
   board.resize(n);
-
   nqueens(board, pos);
 }
 
@@ -72,11 +71,4 @@ int main(int argc, char *argv[]) {
   int n = atoi(argv[1]);
 
   num_queens(n);
-
-
-  //printf("solutions: %d\n", solutions);
-
-  return 0;
-
 }
-

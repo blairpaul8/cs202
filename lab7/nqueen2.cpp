@@ -51,6 +51,7 @@ bool check(vector<int>& board, int col) {
 }
 
 void nqueens(vector<int>& board, int pos) {
+  //At the last column and there are no more queens to place.
   if (pos == (int)board.size()) {
     print_board(board);
   }
