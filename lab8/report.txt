@@ -1,0 +1,45 @@
+Name: Paul Blair
+NET ID: VBQ669
+
+Time Log:
+  Monday Oct. 21st 1 hour
+    - Group meeting to discuss general concept of 
+      programming three card poker. Also, we setup 
+      a github repo for the project.
+
+  Tuesday Oct. 22nd 2 hours
+    - I set up the .h and .cpp file for the CardDeck class. I wrote
+      the default constructor for the deck and worked on a printing function
+      to print the cards with ascii art to show the actual cards. Addtionally,
+      I wrote a makefile for us to use for ease of compiling the project.
+
+  Thursday Oct. 23rd 1 hour
+    - Worked with Nick to finish the deal() function and utilize the 
+      print function I wrote to be able to print out the player and dealer's hand
+
+Pros and cons of using OOP:
+  
+  We choose to use OOP for this project. We thought it would be easiest to have a 
+  CardDeck class to be able to call a new instance of the class for each hand of poker.
+  After each hand the deck will have to be shuffled so by using OOP we can just make new objects
+  for each iteration of the game which is one hand. Some of the pros for using OOP are that this
+  makes the game scalable to where we could add more decks to the overall deck as done in some 
+  casinos. Also, it also makes it a reusable object as already described. Lastly, it helps with 
+  abstracting away how the deck works.
+
+Describe at least one data structure we have covered that would be useful 
+and explain why:
+
+  For this poker game, we are utilizing a struct for the individual cards. This is helpful because it
+  allows us to store additional information about the card rather than just a single number. For our
+  struct Card we are storing the suit and the rank (Ace, king, queen, ect.) then the deck is a vector 
+  of the cards.
+
+Provides at a high level aleast two test cases/unit
+tests for the problem outlined above (2 pts each) :
+  
+  - User input error checking (how much starting money they have and how much they
+    are betting or if they fold)
+  - Check the case if the dealer and player have equal hands resulting a push.
+    In this case the pot needs to be split evenly to the dealer and player.
+
