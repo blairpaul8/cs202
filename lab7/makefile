@@ -2,7 +2,7 @@ CXX=		g++
 CXXFLAGS=	-g -Wall -std=gnu++11
 SHELL=		bash
 
-all:		nqueens nqueen2
+all:		nqueens nqueens2
 
 nqueens:	nqueens.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -11,7 +11,7 @@ nqueen2:	nqueen2.cpp
 
 clean:
 	rm -f nqueens
-	rm -f nqueen2
+	rm -f nqueens2
 
 
 test:		test-8 test-10
