@@ -59,6 +59,7 @@ BSTree::BSTree(const BSTree &t) {
 	sentinel->key = t.sentinel->key;
 	sentinel->val = t.sentinel->val;
 	size = t.size;
+  *this = t;
 
 }
 
