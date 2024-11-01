@@ -52,14 +52,14 @@ vector <string> BSTree::Ordered_Keys() const {
 }
     
 BSTree::BSTree(const BSTree &t) {
-  sentinel = t.sentinel;
-	sentinel->left = t.sentinel->left;
-	sentinel->right = t.sentinel->right;
-	sentinel->parent = t.sentinel->parent;
-	sentinel->key = t.sentinel->key;
-	sentinel->val = t.sentinel->val;
-	size = t.size;
-
+	sentinel = new BSTNode;
+	sentinel->left = NULL;
+	sentinel->right = sentinel;
+	sentinel->parent = NULL;
+	sentinel->key = "---SENTINEL---";
+	sentinel->val = NULL;
+	size = 0;
+	*this = t;
 }
 
 BSTree& BSTree::operator= (const BSTree &t) {
@@ -108,13 +108,12 @@ BSTNode *BSTree::make_balanced_tree(const vector<string> &sorted_keys,
   
   size_t mid = first_index + num_indices / 2;
   BSTNode *n = new BSTNode;
+
   n->left = make_balanced_tree(sorted_keys, vals, first_index, num_indices / 2);
   n->right = make_balanced_tree(sorted_keys, vals, mid + 1, (num_indices - 1) / 2); 
 
   n->key = sorted_keys[mid];
   n->val = vals[mid];
-	n->left = sentinel;
-	n->right = sentinel;
 	
   if (num_indices == 1) {
     return n;
