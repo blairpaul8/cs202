@@ -22,10 +22,14 @@ int BSTree::Depth(const string &key) const {
     if (key == n->key) {
       return depth;
     }
+    //If it the key is less than it key in the node the tree needs
+    //to step left and increment depth;
     if (key < n->key) {
       depth++;
       n = n->left;
     }
+    //If it the key is greater than it key in the node the tree needs
+    //to step right and increment depth;
     else {
       depth++;
       n = n->right;
@@ -66,6 +70,8 @@ BSTree& BSTree::operator= (const BSTree &t) {
 	Clear();
 	vector<string> keys = t.Ordered_Keys();
 	vector<void *> vals = t.Ordered_Vals();
+  //When copying the tree to the new tree it needs to make it as a balanced tree
+  //so make_balanced_tree needs to be called;
 	sentinel->right = make_balanced_tree(keys, vals, 0, vals.size());
 	sentinel->right->parent = sentinel;
   size = vals.size();
@@ -76,10 +82,12 @@ int BSTree::recursive_find_height(const BSTNode *n) const {
   if (n == sentinel) {
     return 0;
   }
-
+  //Finds the height of the left side of the tree and the right side of the make_balanced_tree
+  //recursively.
   int h_left = recursive_find_height(n->left) + 1;
   int h_right = recursive_find_height(n->right) + 1;
 
+  //Returns which ever side is hightest.
   if (h_left >= h_right) {
     return h_left;
   }
