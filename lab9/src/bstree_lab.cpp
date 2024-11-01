@@ -105,19 +105,23 @@ BSTNode *BSTree::make_balanced_tree(const vector<string> &sorted_keys,
   if (num_indices == 0) {
     return sentinel;
   }
-  
+  //This finds the middle of the vector to make the balanced tree 
   size_t mid = first_index + num_indices / 2;
   BSTNode *n = new BSTNode;
-
+  
+  //Recursively make balanced tree for the left and right side of the vector.
   n->left = make_balanced_tree(sorted_keys, vals, first_index, num_indices / 2);
   n->right = make_balanced_tree(sorted_keys, vals, mid + 1, (num_indices - 1) / 2); 
-
+  
+  //set the values of the node;
   n->key = sorted_keys[mid];
   n->val = vals[mid];
 	
   if (num_indices == 1) {
     return n;
   }
+
+  //If this is not a leaf node the nodes parent needs to be set
 	if (n->left != sentinel) {
 		n->left->parent = n;
 	}
